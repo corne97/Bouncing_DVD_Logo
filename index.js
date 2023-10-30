@@ -1,4 +1,4 @@
-let speed = 35;
+let speed = 50;
 let scale = 0.17; 
 let canvas;
 let ctx;
@@ -25,7 +25,7 @@ let dvd = {
 })();
 
 function update() {
-    setTimeout(() => {
+    
         //Draw the canvas background
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -39,8 +39,8 @@ function update() {
         dvd.y+=dvd.yspeed;
         //Check for collision 
         checkColission();
-        update();   
-    }, speed)
+        
+    requestAnimationFrame(update);
 }
 
 // collision check
