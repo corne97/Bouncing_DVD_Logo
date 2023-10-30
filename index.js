@@ -3,12 +3,13 @@ let scale = 0.17;
 let canvas;
 let ctx;
 let logoColor;
+let lasTime = performance.now();
 
 let dvd = {
     x: 200,
     y: 300,
-    xspeed: 10,
-    yspeed: 10,
+    xspeed: 300,
+    yspeed: 300,
     img: new Image()
 };
 
@@ -24,8 +25,16 @@ let dvd = {
     update();
 })();
 
+
 function update() {
-    
+	
+		
+		const now = performance.now();
+		// the time is in ms and we want to convert it to seconds
+		const delta =(lasTime - now) / 1000;
+		// set the lastTime to this frame's render time
+		lasTime = now;
+
         //Draw the canvas background
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -35,8 +44,8 @@ function update() {
         ctx.drawImage(dvd.img, dvd.x, dvd.y, dvd.img.width*scale, dvd.img.height*scale);
 
         // DVD logo movement
-        dvd.x+=dvd.xspeed;
-        dvd.y+=dvd.yspeed;
+        dvd.x+=dvd.xspeed *delta;
+        dvd.y+=dvd.yspeed *delta;
         //Check for collision 
         checkColission();
         
